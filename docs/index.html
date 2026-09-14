@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUGMENTiX AI Systems Starter | Hackathon Incubator Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <!-- Navigation Bar -->
+    <header class="top-nav">
+        <div class="brand">
+            <div class="chip-icon">🚀</div>
+            <div>
+                <div class="brand-title">
+                    <h1>AUGMENTIX AI SYSTEMS</h1>
+                    <span class="badge badge-starter">STARTER & INCUBATOR</span>
+                    <span class="badge badge-api">FASTAPI + PYDANTIC</span>
+                    <span class="badge badge-cohort">8-WEEK SYLLABUS</span>
+                </div>
+                <p class="subtitle">Production-Grade Development Template, Engineering Standards & Modular Edge AI Infrastructure</p>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="https://github.com/ChinmayHudedamani/augmentix-ai-systems-starter" target="_blank" class="btn btn-github">
+                <span>⭐ GitHub Repo</span>
+            </a>
+            <a href="https://github.com/ChinmayHudedamani" target="_blank" class="btn btn-profile">
+                <span>Architect Profile</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Telemetry Ribbon -->
+    <section class="telemetry-ribbon">
+        <div class="tele-item">
+            <span class="lbl">TARGET AUDIENCE</span>
+            <span class="val text-cyan">2nd/3rd Year Undergrad Engineering Teams</span>
+        </div>
+        <div class="tele-item">
+            <span class="lbl">INCUBATION DURATION</span>
+            <span class="val text-green">8 Weeks (Foundations to IEEE Draft)</span>
+        </div>
+        <div class="tele-item">
+            <span class="lbl">CORE TECH STACK</span>
+            <span class="val text-yellow">PyTorch 2.4+ • FastAPI • Pydantic v2 • CUDA</span>
+        </div>
+        <div class="tele-item">
+            <span class="lbl">ENGINEERING GOVERNANCE</span>
+            <span class="val text-green">Conventional Commits & Mandatory VRAM Checks</span>
+        </div>
+    </section>
+
+    <!-- Main Studio Grid -->
+    <main class="main-grid">
+        <!-- Left: Interactive VRAM Calculator & API Sandbox -->
+        <section class="panel-left">
+            <!-- VRAM Estimator Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">🧮</span>
+                    <h2>HARDWARE MEMORY BUDGET CALCULATOR</h2>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Target Language Model:</label>
+                        <select id="sel-model" class="select-control">
+                            <option value="1.54" selected>Qwen2.5-1.5B (1.54B Parameters)</option>
+                            <option value="3.21">Llama-3.2-3B (3.21B Parameters)</option>
+                            <option value="7.24">Mistral-7B-v0.3 (7.24B Parameters)</option>
+                            <option value="8.03">Llama-3.1-8B (8.03B Parameters)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Quantization Bit-Depth:</label>
+                        <div class="radio-toggle-group">
+                            <label class="toggle-btn">
+                                <input type="radio" name="bits" value="16">
+                                <span>FP16 (16-bit)</span>
+                            </label>
+                            <label class="toggle-btn">
+                                <input type="radio" name="bits" value="8">
+                                <span>INT8 (8-bit)</span>
+                            </label>
+                            <label class="toggle-btn active">
+                                <input type="radio" name="bits" value="4" checked>
+                                <span>INT4 (4-bit)</span>
+                            </label>
+                            <label class="toggle-btn">
+                                <input type="radio" name="bits" value="2">
+                                <span>INT2 (2-bit)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="budget-results-box">
+                        <div class="b-row">
+                            <span>Static Weight Footprint:</span>
+                            <strong class="text-cyan" id="res-static">0.770 GB</strong>
+                        </div>
+                        <div class="b-row">
+                            <span>Estimated Peak VRAM (with 35% KV buffer):</span>
+                            <strong class="text-green" id="res-peak">1.040 GB</strong>
+                        </div>
+                        <div class="b-row">
+                            <span>RTX 4050 (6GB) Headroom:</span>
+                            <strong class="text-yellow" id="res-headroom">4.960 GB Remaining</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FastAPI Schema Tester Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">⚡</span>
+                    <h2>FASTAPI REST PLAYGROUND (`POST /api/v1/budget`)</h2>
+                </div>
+                <div class="card-body">
+                    <div class="code-box">
+                        <div class="code-title">JSON REQUEST PAYLOAD</div>
+                        <pre id="json-req">{
+  "model_id": "Qwen2.5-1.5B-Instruct",
+  "param_count_billions": 1.54,
+  "quantization_bits": 4
+}</pre>
+                    </div>
+
+                    <div class="code-box" style="margin-top:0.8rem;">
+                        <div class="code-title">FASTAPI VALIDATED RESPONSE (200 OK)</div>
+                        <pre class="text-green" id="json-res">{
+  "model_id": "Qwen2.5-1.5B-Instruct",
+  "quantization_bits": 4,
+  "static_weight_vram_gb": 0.77,
+  "estimated_peak_vram_gb": 1.04,
+  "status": "VALIDATED"
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right: 8-Week Incubation Syllabus Explorer -->
+        <section class="panel-right">
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">📅</span>
+                    <h2>8-WEEK HACKATHON INCUBATION ROADMAP</h2>
+                </div>
+                <div class="card-body">
+                    <div class="syllabus-tabs">
+                        <button class="s-tab active" data-phase="1">Phase 1: Foundations (W1-2)</button>
+                        <button class="s-tab" data-phase="2">Phase 2: Quantization (W3-4)</button>
+                        <button class="s-tab" data-phase="3">Phase 3: Serving & State (W5-6)</button>
+                        <button class="s-tab" data-phase="4">Phase 4: Capstone (W7-8)</button>
+                    </div>
+
+                    <div class="phase-detail-box" id="phase-content">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
