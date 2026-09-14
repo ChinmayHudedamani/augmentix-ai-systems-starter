@@ -1,0 +1,29 @@
+# Python & Environment
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+*.env
+!.env.example
+
+# PyTorch / Models / Checkpoints
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+models/
+weights/
+
+# Build & CUDA artifacts
+build/
+dist/
+*.so
+*.o
+
+# Logs & IDE
+.vscode/
+.idea/
+*.log
+benchmarks/results/
